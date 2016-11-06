@@ -56,3 +56,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+      <div class="container">
+      <div class="starter-template">
