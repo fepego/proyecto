@@ -2,7 +2,18 @@
 	   </br>
 </br>
 
-<h1>hola</h1>
+<label for="usuario">Nombre Usuario</label>
+                          <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingresar Usuario">
+                          <label for="nombreUsuario">Nombre Empleado</label>
+                          <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresar Nombre Empleado" >
+                          <label for="telefono">Telefono/Celular</label>
+                          <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingresar teléfono/Celular Empleado">
+                          <label for="email">Correo Electronico</label>
+                          <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar Email">
+                          <label for="direccion">Dirección</label>
+                          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresar dirección" value="<?php echo set_value('direccion') ?>">
+                          <label for="rol">Rol Autorización</label>
+                          <select class="form-control" name="rol">
       </div>
 
     </div><!-- /.container -->
