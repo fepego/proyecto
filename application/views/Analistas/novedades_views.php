@@ -1,19 +1,23 @@
 <?php $this->load->view('plantillaInicio') ?>
 	   </br>
 </br>
+          <br> </br>
+          <label for="titulo">Título Novedad</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingresar título">
 
-<label for="usuario">Nombre Usuario</label>
-                          <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingresar Usuario">
-                          <label for="nombreUsuario">Nombre Empleado</label>
-                          <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresar Nombre Empleado" >
-                          <label for="telefono">Telefono/Celular</label>
-                          <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingresar teléfono/Celular Empleado">
-                          <label for="email">Correo Electronico</label>
-                          <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar Email">
-                          <label for="direccion">Dirección</label>
-                          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresar dirección" value="<?php echo set_value('direccion') ?>">
-                          <label for="rol">Rol Autorización</label>
-                          <select class="form-control" name="rol">
+          <label for="fechainicio">Fecha Inicio</label>
+          <input type="date" class="form-control" id="fechainicio" name="fechainicio" >
+
+          <label for="fechafin">Fecha Fin</label>
+          <input type="date" class="form-control" id="fechafin" name="fechafin" >
+
+          <label for="descripcion">Descripción Novedad</label>
+          <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar descripción de la novedad"></textarea>
+
+          <label for="archivo">Adjuntar archivo</label>
+          <input type="file" class="form-control" id="archivo" name="archivo" >
+
+
       </div>
 
     </div><!-- /.container -->
