@@ -37,6 +37,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <?php
+                if(isset($this->session->userdata['login']))
+                {
+                  ?><li><a href="<?php echo site_url('/Usuario/cerrarSesion/'); ?>"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+              <?php  }
+                else {
+                  ?><li><a href="<?php echo site_url('/Usuario/iniciarSesion/'); ?>"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+              <?php  }
+             ?>
+          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

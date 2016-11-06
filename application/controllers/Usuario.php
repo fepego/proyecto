@@ -22,6 +22,11 @@ class Usuario extends CI_Controller {
     {
         $this->load->view('Usuarios/login_view.php');
     }
+    public function agregarUsuario()
+    {
+        $datos= array('roles'=>$this->Usuario_model->obtenerRoles());
+        $this->load->view("Usuarios/AgregarUsuario_view",$datos);
+    }
     public function inicio()
     {
         $this->form_validation->set_rules('username', 'Usuario', 'trim|required');
@@ -32,8 +37,7 @@ class Usuario extends CI_Controller {
        else {
          $data = array(
             'username' => $this->input->post('username',TRUE),
-             'password'=>$this->input->post('password',TRUE)
-            //'password' => hash('sha256',$this->input->post('password',TRUE))
+            'password' => hash('sha256',$this->input->post('password',TRUE))
           );
           $result = $this->Usuario_model->login($data);
           if ($result == TRUE) {
@@ -64,6 +68,45 @@ class Usuario extends CI_Controller {
        }
      }
     }
+    public function setUsuario()
+    {
+        if ($this->session->userdata['login']['rol']==1) {
+            $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|max_length[20]|alpha_dash');
+            $this->form_validation->set_rules('nombreUsuario','Nombre','trim|required|max_length[50]');
+            $this->form_validation->set_rules('email','email','required|valid_email|max_length[60]');
+            if ($this->form_validation->run() == FALSE) {
+                $this->agregarUsuario();
+            }
+            else
+            {
+                $datos= array(
+                    'ID_usuario'=>$this->input->post("usuario",TRUE),
+                    'Pass'=> hash("sha256",$this->input->post('usuario',TRUE)),
+                    'Nombre'=>$this->input->post("nombreUsuario",TRUE),
+                    'Email'=>$this->input->post("email",TRUE),
+                    'ID_rol'=>$this->Usuario_model->obtenerIDRol($this->input->post("rol",TRUE))
+                );
+                if($this->Usuario_model->buscarIDUsuario($datos)==TRUE and $this->Usuario_model->buscarEmail($datos)==TRUE)
+                {
+                    $this->Usuario_model->insertarUsuario($datos);
+                    $res['roles']=$this->Usuario_model->obtenerRoles();
+                    $res['insert_message']="Se Agrego correctamente el usuario";
+                    $this->load->view('Usuarios/AgregarUsuario_view',$res);
+                }
+                else
+                {
+                    $datos['roles']=$this->Usuario_model->obtenerRoles();
+                    $datos['error_message']="usuario no disponible o el correo asociado ya tiene una cuenta registrada";
+                    $this->load->view('Usuarios/AgregarUsuario_view',$datos);
+                    
+                }
+            }
+        }
+        else
+        {
+            $this->iniciarSesion();
+        }
+    }
     public function verificarUsuario()
     {
         if($this->session->userdata['login']['rol']==1)
@@ -76,18 +119,87 @@ class Usuario extends CI_Controller {
          }
         if($this->session->userdata['login']['rol']==3)
          {
-            $this->load->view('gestionUsuarios/lider_view');
+            $this->load->view('Usuarios/lider_view');
          }
         if($this->session->userdata['login']['rol']==4)
          {
-            $this->load->view('gestionUsuarios/analista_view');
+            $this->load->view('Usuarios/analista_view');
          }
     }
-    public function agregarUsuario()
+    public function cerrarSesion()
+     {
+       $sess_array = array(
+         'username' => '',
+         'email' => '',
+         'rol'  => '',
+       );
+       $this->session->unset_userdata('login',$sess_array);
+       $data['message_display'] = 'Successfully Logout';
+       $this->session->sess_destroy();
+       $this->load->view('Usuarios/login_view', $data);
+     }
+    public function actualizarPass()
+{
+  $this->form_validation->set_rules('passAct', 'Pass Actual', 'trim|required');
+  $this->form_validation->set_rules('passNuev', 'Pass Nuevo', 'trim|required');
+  $this->form_validation->set_rules('passConf', 'Pass Confirmación', 'trim|required');
+  if ($this->form_validation->run() == true) {
+    if($this->input->post('passNuev',true)==$this->input->post('passConf',true))
     {
-        $array= $this->Usuario_model->getUsuarios();
-        $datos= array('nombre'=> $array[0]->ID_usuario);
-        $this->load->view("prueba",$datos);
-        
+      $datos=array(
+        'usuario'=>$this->session->userdata['login']['username'],
+        'passAct'=>hash('sha256',$this->input->post('passAct',true)),
+        'passNuevo'=>hash('sha256',$this->input->post('passNuev',true))
+      );
+      if($this->Usuario_model->consPass($datos))
+      {
+        if($this->Usuario_model->cambiarPass($datos))
+        {
+          $res['insert_message']="Se actualizó correctamente la contraseña";
+          $res['usu']=$arr['usu']=$this->session->userdata['login']['username'];
+          $this->load->view('Usuarios/modificarPass_view',$res);
+        }
+        else {
+          $res['error_message']="error de actualización";
+          $res['usu']=$arr['usu']=$this->session->userdata['login']['username'];
+          $this->load->view('Usuarios/modificarPass_view',$res);
+        }
+      }
+      else {
+        $res['error_message']="La contraseña actual no es correcta";
+        $res['usu']=$arr['usu']=$this->session->userdata['login']['username'];
+        $this->load->view('Usuarios/modificarPass_view',$res);
+      }
     }
+    else {
+      $res['error_message']="La contraseña nueva y su confirmación no son iguales";
+      $res['usu']=$arr['usu']=$this->session->userdata['login']['username'];
+      $this->load->view('Usuarios/modificarPass_view',$res);
+    }
+
+  }
+  else {
+    $res['usu']=$arr['usu']=$this->session->userdata['login']['username'];
+    $this->load->view('Usuarios/modificarPass_view',$res);
+  }
+
+}
+public function restaurarPass($id)
+{
+  $datos = array(
+    'passNuevo' =>  $pass=hash("sha256",$id),
+    'usuario'=>$id
+  );
+  if($this->Usuario_model->restPass($datos))
+  {
+    $msj['assert_message']='Recuperado con exito';
+    $msj['id']=$id;
+    $this->load->view('confirmacion/recuperar_view',$msj);
+  }
+  else {
+    $msj['error_message']='Error de recuperación';
+    $this->load->view('confirmacion/recuperar_view');
+  }
+}
+    
 }

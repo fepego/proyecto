@@ -1,13 +1,8 @@
 <?php $this->load->view('plantillaInicio') ?>
 	   </br>
         </br>
-        <h1>Jefe Menú Principal</h1>
-        </center>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="<?php echo site_url('/welcome') ?>">Módulo cuentas y Usuarios</a></li>
-     		     <li><a href="<?php echo site_url('Usuario/actualizarPass')?>">Modificar Contraseña</a></li>
-                <li><a href="<?php echo site_url('Usuario/agregarUsuario/')?>">Agregar Usuario</a></li>
-   		   </ul>
+        <h1>Menú Principal Practicante</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
       </div>
 
     </div><!-- /.container -->
