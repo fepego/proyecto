@@ -1,8 +1,11 @@
 <?php $this->load->view('plantillaInicio') ?>
 	   </br>
         </br>
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>Agregar Usuario</h1>
+        </center>
+          <div class="container">
+            <?php $attributes = array("class" => "form-group", "id" => "formaRegistro", "name" => "formaRegistro");
+            echo form_open("gestionUsuario/validarUsuario", $attributes);?>
       </div>
 
     </div><!-- /.container -->
