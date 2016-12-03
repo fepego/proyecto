@@ -98,7 +98,7 @@ class Usuario extends CI_Controller {
                     $datos['roles']=$this->Usuario_model->obtenerRoles();
                     $datos['error_message']="usuario no disponible o el correo asociado ya tiene una cuenta registrada";
                     $this->load->view('Usuarios/AgregarUsuario_view',$datos);
-                    
+
                 }
             }
         }
@@ -119,11 +119,11 @@ class Usuario extends CI_Controller {
          }
         if($this->session->userdata['login']['rol']==3)
          {
-            $this->load->view('Usuarios/lider_view');
+            $this->load->view('Usuarios/Analista_view');
          }
         if($this->session->userdata['login']['rol']==4)
          {
-            $this->load->view('Usuarios/analista_view');
+            $this->load->view('Usuarios/lider_view');
          }
     }
     public function cerrarSesion()
@@ -201,5 +201,5 @@ public function restaurarPass($id)
     $this->load->view('confirmacion/recuperar_view');
   }
 }
-    
+
 }

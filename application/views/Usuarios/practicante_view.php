@@ -2,9 +2,17 @@
 	   </br>
         </br>
         <h1>Menú Principal Practicante</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
 
+				<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="<?php echo site_url('/welcome') ?>">Módulo cuentas y Usuarios</a></li>
+				 <li><a href="<?php echo site_url('Usuario/actualizarPass')?>">Modificar Contraseña</a></li>
+		 		</ul>
+				<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="<?php echo site_url('/welcome') ?>">Reportes</a></li>
+				 <li><a href="<?php echo site_url('practicante/asignar')?>">Agregar Reporte Asignaciones</a></li>
+				 <li><a href="<?php echo site_url('practicante/consultarReportes')?>">Consultar Reportes de Asignaciones</a></li>
+		 		</ul>
+				</div>
     </div><!-- /.container -->
 
 

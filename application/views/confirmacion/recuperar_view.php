@@ -1,4 +1,4 @@
-<?php $this->load->view('layout') ?>
+<?php $this->load->view('plantillaInicio') ?>
 								<h1>Recuperar Contraseña</h1>
 								</center>
                 <div class="panel panel-success">

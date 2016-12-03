@@ -20,6 +20,20 @@ class Usuario_model extends CI_Model
          return false;
        }
     }
+    public function getAnalitas()
+    {
+      $condicion= "ID_rol= 3";
+        $this->db->select('*');
+       $this->db->from('Usuario');
+       $this->db->where($condicion);
+       $query = $this->db->get();
+
+       if ($query->num_rows() > 0) {
+         return $query;
+       } else {
+         return false;
+       }
+    }
     public function login($data)
     {
        $condition = "ID_usuario =" . "'" . $data['username'] . "' AND " . "Pass =" . "'" . $data['password']."'";
@@ -140,4 +154,3 @@ public function buscarEmail($data)
 }
 
 }
-         
