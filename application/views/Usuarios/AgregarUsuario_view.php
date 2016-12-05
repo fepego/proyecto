@@ -51,7 +51,9 @@
                          <center><button type="submit" class="btn btn-success">Crear</button></center>
               </fieldset>
               <?php
-                 echo form_close(); ?>   
+                 echo form_close(); ?>
+							 </div>
+						 </div>
       </div>
 
     </div><!-- /.container -->

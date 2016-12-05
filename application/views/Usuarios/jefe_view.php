@@ -8,6 +8,15 @@
      		     <li><a href="<?php echo site_url('Usuario/actualizarPass')?>">Modificar Contraseña</a></li>
                 <li><a href="<?php echo site_url('Usuario/agregarUsuario/')?>">Agregar Usuario</a></li>
    		   </ul>
+				 <ul class="nav nav-pills nav-stacked">
+						 <li class="active"><a href="<?php echo site_url('/welcome') ?>">Control Analistas</a></li>
+						 <li><a href="<?php echo site_url('Jefe/buscarUsuario')?>">Buscar Analista</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="<?php echo site_url('/welcome') ?>">Reportes</a></li>
+			 <li><a href="<?php echo site_url('practicante/asignar')?>">Agregar Reporte Asignaciones</a></li>
+			 <li><a href="<?php echo site_url('practicante/consultarReportes')?>">Consultar Reportes de Asignaciones</a></li>
+			</ul>
       </div>
 
     </div><!-- /.container -->

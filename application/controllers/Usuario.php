@@ -14,19 +14,34 @@ class Usuario extends CI_Controller {
           $this->load->model('Usuario_model');
           $this->load->library('encrypt');
      }
+		 /**
+		  * Función para navegar al formulario para agregar un usuario
+		  * @return [type] [description]
+		  */
 	public function index()
 	{
 		$this->load->view('AgregarUsuario_view');
 	}
+	/**
+	 * Función para navegar a ventana de incio de sesión
+	 */
     public function IniciarSesion()
     {
         $this->load->view('Usuarios/login_view.php');
     }
+		/**
+		 * Función para navegar a la ventada de agregar usuario cargando lista de roles de BD
+		 * @return [type] [description]
+		 */
     public function agregarUsuario()
     {
         $datos= array('roles'=>$this->Usuario_model->obtenerRoles());
         $this->load->view("Usuarios/AgregarUsuario_view",$datos);
     }
+		/**
+		 * Función para confirmar datos de usuario e iniciar sesión con una cookie encriptada
+		 * @return [type] [description]
+		 */
     public function inicio()
     {
         $this->form_validation->set_rules('username', 'Usuario', 'trim|required');
@@ -68,6 +83,9 @@ class Usuario extends CI_Controller {
        }
      }
     }
+		/**
+		 * Función para agregar un usuario a la base de datos
+		 */
     public function setUsuario()
     {
         if ($this->session->userdata['login']['rol']==1) {
@@ -107,6 +125,10 @@ class Usuario extends CI_Controller {
             $this->iniciarSesion();
         }
     }
+		/**
+		 * Función para verificar el tipo de usuario y navegar a la bandeja de entrada de acuerdo a su rol
+		 * @return [type] [description]
+		 */
     public function verificarUsuario()
     {
         if($this->session->userdata['login']['rol']==1)
@@ -126,6 +148,10 @@ class Usuario extends CI_Controller {
             $this->load->view('Usuarios/lider_view');
          }
     }
+		/**
+		 * Función para cerrar la sesión y limpiar la cookie del browser
+		 * @return [type] [description]
+		 */
     public function cerrarSesion()
      {
        $sess_array = array(
@@ -138,6 +164,10 @@ class Usuario extends CI_Controller {
        $this->session->sess_destroy();
        $this->load->view('Usuarios/login_view', $data);
      }
+		 /**
+		  * Función para modificar contraseña en bD
+		  * @return [type] [description]
+		  */
     public function actualizarPass()
 {
   $this->form_validation->set_rules('passAct', 'Pass Actual', 'trim|required');
@@ -184,6 +214,11 @@ class Usuario extends CI_Controller {
   }
 
 }
+/**
+ * Función para recuperar contraseña en caso de olvido.
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
 public function restaurarPass($id)
 {
   $datos = array(

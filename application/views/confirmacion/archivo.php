@@ -1,19 +1,15 @@
 <?php $this->load->view('plantillaInicio') ?>
+	   </br>
+        </br>
+        <h3></h3>
+				<div class="panel panel-success">
+					<div class="panel-heading"><center><span>Novedad Agregada correctamente</span><center></div>
+					<div class="panel-body">
+            <center><p><?php echo anchor('analista', 'Se agregó su reporte correctamente, click en este link para regresar'); ?></p></a></center>
+					</div>
+				</div>
 
-		</br>
-	 </br>
-	 <h1>Menú Principal Practicante</h1>
-
-	 <ul class="nav nav-pills nav-stacked">
-			 <li class="active"><a href="<?php echo site_url('/welcome') ?>">Módulo cuentas y Usuarios</a></li>
-		<li><a href="<?php echo site_url('Usuario/actualizarPass')?>">Modificar Contraseña</a></li>
-	 </ul>
-	 <ul class="nav nav-pills nav-stacked">
-			 <li class="active"><a href="<?php echo site_url('/welcome') ?>">Novedades</a></li>
-		<li><a href="<?php echo site_url('analista/agregarNovedad')?>">Agregar Novedad</a></li>
-		<li><a href="<?php echo site_url('analista/consultarNovedad')?>">Consultar Novedades</a></li>
-	 </ul>
-	   </div>
+      </div>
 
     </div><!-- /.container -->
 

@@ -33,9 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo site_url('/welcome/'); ?>">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="<?php echo site_url('/welcome/'); ?>">Inicio</a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
             <?php

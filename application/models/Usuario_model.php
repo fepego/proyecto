@@ -7,6 +7,10 @@ class Usuario_model extends CI_Model
           // Call the Model constructor
           parent::__construct();
      }
+     /**
+      * obtene todos los usuarios de la base de datos
+      * @return [type] [description]
+      */
     public function getUsuarios()
     {
         $this->db->select('*');
@@ -20,6 +24,10 @@ class Usuario_model extends CI_Model
          return false;
        }
     }
+    /**
+     * Obtiene todos los analistas de la base de datos
+     * @return [type] [description]
+     */
     public function getAnalitas()
     {
       $condicion= "ID_rol= 3";
@@ -34,6 +42,11 @@ class Usuario_model extends CI_Model
          return false;
        }
     }
+    /**
+     * Verifica si el usuario existe en la bd con ese usuario y contraseña
+     * @param  [type] $data [description]
+     * @return [type]       [description]
+     */
     public function login($data)
     {
        $condition = "ID_usuario =" . "'" . $data['username'] . "' AND " . "Pass =" . "'" . $data['password']."'";
@@ -49,6 +62,11 @@ class Usuario_model extends CI_Model
          return false;
        }
     }
+    /**
+     * Obtiene la información del usuario
+     * @param  [type] $username [Id de usuario]
+     * @return [type]           [description]
+     */
     public function leerUsuario($username) {
 
        $condition = "ID_usuario =" . "'" . $username . "'";
@@ -64,6 +82,11 @@ class Usuario_model extends CI_Model
          return false;
        }
      }
+     /**
+      * Busca un usuario a partir de su ID
+      * @param  [type] $data [description]
+      * @return [type]       [description]
+      */
 public function buscarIdUsuario($data)
 {
   $cond="ID_usuario= '". $data['ID_usuario']."'";
@@ -78,6 +101,12 @@ public function buscarIdUsuario($data)
   }
   return TRUE;
 }
+/**
+ * busca si existe el usuario mediante su correo electronico
+ *
+ * @param  [type] $data [email de usuario]
+ * @return [boolean]       [si existe el usuario false, si no true]
+ */
 public function buscarEmail($data)
 {
   $cond="email= '".$data['Email']."'";
@@ -92,6 +121,11 @@ public function buscarEmail($data)
   }
   return TRUE;
 }
+/**
+ * persiste usuario en base de datos
+ * @param  [type] $datos [arreglo con la información de usuario]
+ * @return [boolean]        [true si se realizó con exito la operación]
+ */
     public function insertarUsuario($datos)
 {
     if($this->db->insert('usuario',$datos))
@@ -102,6 +136,10 @@ public function buscarEmail($data)
      return FALSE;
    }
 }
+/**
+ * Obtiene los roles del sistema
+ * @return [type] [arreglo de roles]
+ */
     public function obtenerRoles()
     {
         $this->db->select('*');
@@ -113,6 +151,11 @@ public function buscarEmail($data)
          return false;
        }
     }
+    /**
+     * busca si existe el rol en la base de datos
+     * @param  [type] $rol [rol a buscar]
+     * @return [type]      [información del rol ]
+     */
     public function obtenerIdRol($rol)
     {
         $cond= "nombre_rol= '".$rol."'";
@@ -140,6 +183,11 @@ public function buscarEmail($data)
   }
   return false;
 }
+/**
+ * actualiza en la base de datos la contraseña de usuario
+ * @param  [type] $datos [description]
+ * @return [type]        [description]
+ */
     public function cambiarPass($datos)
 {
   $tup=array(

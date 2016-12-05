@@ -5,7 +5,7 @@
 
      <div class="container">
       <?php $attributes = array("class" => "form-group", "id" => "formaRegistro", "name" => "formaRegistro");
-      echo form_open_multipart("analista/addNovedad", $attributes);?>
+      echo form_open_multipart("Jefe/actualizarNovedad", $attributes);?>
 
           <?php
           if(validation_errors())
@@ -32,13 +32,19 @@
 
          <div class="form-group">
           <label for="titulo">Título Novedad</label>
-          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ingresar Novedad">
+          <input type="text" class="form-control" id="titulo" name="titulo"  disabled="true" value= "<?php echo $novedad->Titulo ?>">
           <label for="fechaInicio">Fecha Inicio</label>
-          <input type="datetime-local" class="form-control" id="fechaInicio" name="fechaInicio" >
+          <input type="text" class="form-control" id="fechaInicio" name="fechaInicio" disabled="true" value= "<?php echo $novedad->FechaInicio ?>">
           <label for="fechaFin">Fecha Final</label>
-          <input type="datetime-local" class="form-control" id="fechaFin" name="fechaFin" >
+          <input type="text" class="form-control" id="fechaFin" name="fechaFin" disabled="true" value= "<?php echo $novedad->FechaFin ?>">
           <label for="descripcion">Descripción Novedad</label>
-          <textarea class="form-control" id="descripcion" name="descripcion">Ingresar descripción de la novedad</textarea>
+          <textarea class="form-control" id="descripcion" name="descripcion" disabled="true"><?php echo $novedad->Descripcion ?></textarea>
+				  <input type="hidden" name="id" value="<?php echo $novedad->ID ?>">
+					<select class="form-control" name="estado">
+						<option value="PENDIENTE">PENDIENTE</option>
+						<option value="APROBADO">APROBADO</option>
+						<option value="DENEGADO">DENEGADO</option>
+					</select>
 
       </div>
 					<center> <button type="submit" class="btn btn-success">Enviar</button></center>

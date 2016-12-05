@@ -15,21 +15,32 @@ class practicante extends CI_Controller {
 				$this->load->library('encrypt');
 
     }
-
+/**
+ * Función para navegar a bandeja de entrada de Practicante
+ * @return [type] [description]
+ */
 	public function index()
 	{
 		$this->load->view('Usuarios/practicante_view');
 	}
-
+/**
+ * Función para ir al formulario y agregar un nuevo reporte de asignaciones, carga en una lista de selección
+ * todos los analistas que están en el sistema
+ *
+ */
     public function asignar(){
 				$datos = array('usuarios' => $this->Usuario_model->getAnalitas() );
         $this->load->view('/practicante/agregarReporte_view',$datos);
     }
+		/**
+		 * Función que a partir de la información suministrada en el formulario guarda el reporte en la BD
+		 *
+		 */
 		public function agregarReporte()
 		{
 			if(isset($this->session->userdata['login']))
 			{
-				if ($this->session->userdata['login']['rol']==2)
+				if ($this->session->userdata['login']['rol']==2 || $this->session->userdata['login']['rol']==1 )
 				{
 					$this->form_validation->set_rules('fecha', 'Fecha', 'required');
 					$this->form_validation->set_rules('analista','Analista','trim|required');
@@ -64,10 +75,18 @@ class practicante extends CI_Controller {
 				}
 			}
 		}
+		/**
+		 * Función que permite navegar a ventana de consulta de reportes por fechas
+		 * @return [type] [description]
+		 */
 		public function consultarReportes()
 		{
 			$this->load->view("practicante/consultarReporte");
 		}
+		/**
+		 * Función que recupera todas las asignaciones realizadas en una fecha previamente obtenida
+		 * @return [type] [description]
+		 */
 		public function getReportes()
 		{
 			if(isset($this->session->userdata['login']))
